@@ -28,12 +28,13 @@ const SearchParams = () => {
   }
 
   return (
-    <div className="search-params">
+    <div className="flex gap-5">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           requestPets();
         }}
+        className="w-full"
       >
         <label className={TailwindClasses.labelText} htmlFor="location">
           Location
