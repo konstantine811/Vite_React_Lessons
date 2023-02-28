@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 // components
-import Pet from "./Pet";
+import Results from "./Results";
 // classes
 import { TailwindClasses } from "./utils/tailwind.classes";
+// utils
+import useBreedList from "./useBreedList";
+
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 const SearchParams = () => {
   const [location, setlocation] = useState("");
-  const [animal, setAnimal] = useState("");
+  const [animal, setAnimal] = useState(ANIMALS[0]);
   const [breed, setBreed] = useState("");
   const [pets, setPets] = useState([]);
-  const breeds = [];
+  const [breeds] = useBreedList(animal);
 
   useEffect(() => {
     requestPets();
@@ -17,7 +20,6 @@ const SearchParams = () => {
   }, []);
 
   async function requestPets() {
-    console.log("request");
     const res = await fetch(
       `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
     );
@@ -88,14 +90,7 @@ const SearchParams = () => {
           Submit
         </button>
       </form>
-      {pets.map((pet) => (
-        <Pet
-          name={pet.name}
-          animal={pet.animal}
-          breed={pet.breed}
-          key={pet.id}
-        />
-      ))}
+      <Results pets={pets} />
     </div>
   );
 };
