@@ -1,16 +1,13 @@
-import './App.scss'
-import Pet from './Pet';
+import "./App.scss";
+import SearchParams from "./SearchParams";
 
 function App() {
-
   return (
-   <div>
-    <h1>Hello world</h1>
-    <Pet name="Luna" animal="dog" breed="Havanse"></Pet>
-    <Pet name="Pepper" animal="bird" breed="Cockatiel"></Pet>
-    <Pet name="Doink" animal="cat" breed="Mixed"></Pet>
-   </div>
-  )
+    <div className="container">
+      <h1 className="text-2xl">Hello world</h1>
+      <SearchParams />
+    </div>
+  );
 }
 
-export default App
+export default App;
