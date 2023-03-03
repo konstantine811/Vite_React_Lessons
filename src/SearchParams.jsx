@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
 // components
 import Results from "./Results";
 // classes
 import { TailwindClasses } from "./utils/tailwind.classes";
 // utils
 import useBreedList from "./useBreedList";
+import AdoptedPetContext from "./AdoptedPetContext";
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 const SearchParams = () => {
@@ -13,6 +14,7 @@ const SearchParams = () => {
   const [breed, setBreed] = useState("");
   const [pets, setPets] = useState([]);
   const [breeds] = useBreedList(animal);
+  const [adoptedPet] = useContext(AdoptedPetContext);
 
   useEffect(() => {
     requestPets();
@@ -36,6 +38,15 @@ const SearchParams = () => {
         }}
         className="w-full"
       >
+        {adoptedPet ? (
+          <div className="w-1/2 m-auto">
+            <img
+              className="rounded-full"
+              src={adoptedPet.images[0]}
+              alt={adoptedPet.name}
+            />
+          </div>
+        ) : null}
         <label className={TailwindClasses.labelText} htmlFor="location">
           Location
         </label>
